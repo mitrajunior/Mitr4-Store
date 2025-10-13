@@ -2,10 +2,6 @@ version: "3.8"
 services:
   seerr:
     image: ghcr.io/mitrajunior/seerr-custom:latest
-    container_name: seerr-custom
-    restart: unless-stopped
-    ports:
-      - "5060:5055"
     environment:
       TZ: "Europe/Lisbon"
       NODE_ENV: "production"
@@ -16,17 +12,12 @@ services:
       DB_PASS: "jellyseerr"
       DB_NAME: "jellyseerr"
       DB_USE_SSL: "false"
-    depends_on:
-      postgres:
-        condition: service_healthy
     volumes:
       - /umbrel/app-data/seerr-custom/config:/app/config
       - /umbrel/app-data/seerr-custom/db:/app/db
 
   postgres:
     image: postgres:15
-    container_name: seerr-postgres-custom
-    restart: unless-stopped
     environment:
       POSTGRES_USER: jellyseerr
       POSTGRES_PASSWORD: jellyseerr
@@ -38,3 +29,11 @@ services:
       retries: 10
     volumes:
       - /umbrel/app-data/seerr-custom/postgres:/var/lib/postgresql/data
+
+  app_proxy:
+    image: getumbrel/app-proxy:1.0.0
+    environment:
+      APP_HOST: seerr
+      APP_PORT: 5055
+      # descomenta se quiseres o app aberto sem login Umbrel:
+      # PROXY_AUTH_ADD: "false"
