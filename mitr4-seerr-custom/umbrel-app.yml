@@ -19,8 +19,7 @@ repo: https://github.com/mitrajunior/seerr-custom
 support: https://github.com/mitrajunior/seerr-custom/issues
 
 gallery:
-  - https://i.imgur.com/yyVG0Jb.jpeg
-
+  - https://raw.githubusercontent.com/mitrajunior/seerr-custom/main/public/jellyseerr-filters-availability-mock.png
 releaseNotes: >-
   Primeira versão da app na Mitr4 Store com proxy do Umbrel e imagem GHCR.
 
