@@ -10,7 +10,7 @@ services:
       # PODES usar só o nome do serviço ("seerr"); o DNS do Docker resolve.
       # Se o teu ambiente exigir o formato completo, usa: mitr4-seerr-custom_seerr_1
       APP_HOST: seerr
-      APP_PORT: 5057
+      APP_PORT: 5055
       # Opcional: para não exigir login do Umbrel ao abrir a app
       # PROXY_AUTH_ADD: "false"
 
