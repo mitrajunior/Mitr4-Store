@@ -1,0 +1,29 @@
+manifestVersion: 1
+id: mitr4-seerr-custom2
+name: Seerr Custom
+tagline: Seerr mod com filtro para Movies/Series “Disponíveis”
+icon: https://raw.githubusercontent.com/mitrajunior/seerr-custom/main/public/os_logo_square.png
+category: Media
+version: "1.0.0"
+port: 5057
+description: >-
+  Build personalizada do Seerr/Jellyseerr com um filtro para mostrar apenas
+  títulos que já estão disponíveis no servidor (ex.: Jellyfin/Plex/Emby),
+  aproveitando o estado de disponibilidade que a app já mantém.
+
+developer: mitrajunior
+website: https://github.com/mitrajunior/seerr-custom2
+submitter: mitrajunior
+submission: https://github.com/mitrajunior/Mitr4-Store
+repo: https://github.com/mitrajunior/seerr-custom2
+support: https://github.com/mitrajunior/seerr-custom/issues
+
+gallery:
+  - https://raw.githubusercontent.com/mitrajunior/seerr-custom/main/public/jellyseerr-filters-availability-mock.png
+releaseNotes: >-
+  Primeira versão da app na Mitr4 Store com proxy do Umbrel e imagem GHCR.
+
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
