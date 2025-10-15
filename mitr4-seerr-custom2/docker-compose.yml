@@ -1,0 +1,50 @@
+version: "3.7"
+
+services:
+  # Proxy do painel da Umbrel
+  app_proxy:
+    image: getumbrel/app-proxy:1.0.0
+    depends_on:
+      - seerr
+    environment:
+      # PODES usar só o nome do serviço ("seerr"); o DNS do Docker resolve.
+      # Se o teu ambiente exigir o formato completo, usa: mitr4-seerr-custom_seerr_1
+      APP_HOST: seerr
+      APP_PORT: 5055
+      # Opcional: para não exigir login do Umbrel ao abrir a app
+      # PROXY_AUTH_ADD: "false"
+
+  # A tua app
+  seerr:
+    image: ghcr.io/mitrajunior/seerr-custom2:latest
+    # Se precisares que rode como o user 'umbrel' (UID 1000/GID 1000), descomenta:
+    # user: "1000:1000"
+    # init: true  # opcional, igual ao exemplo "hello-world"
+    environment:
+      TZ: "Europe/Lisbon"
+      NODE_ENV: "production"
+      DB_TYPE: "postgres"
+      DB_HOST: "postgres"
+      DB_PORT: "5432"
+      DB_USER: "jellyseerr"
+      DB_PASS: "jellyseerr"
+      DB_NAME: "jellyseerr"
+      DB_USE_SSL: "false"
+    volumes:
+      - /umbrel/app-data/seerr-custom/config:/app/config
+      - /umbrel/app-data/seerr-custom/db:/app/db
+
+  # Base de dados
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: jellyseerr
+      POSTGRES_PASSWORD: jellyseerr
+      POSTGRES_DB: jellyseerr
+    healthcheck:
+      test: ["CMD-SHELL","pg_isready -U jellyseerr"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - /umbrel/app-data/seerr-custom/postgres:/var/lib/postgresql/data
