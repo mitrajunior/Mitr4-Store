@@ -1,9 +1,13 @@
 version: "3.8"
+#services:
+#  seerr:
+#    build:
+#      context: https://github.com/mitrajunior/seerr-custom2.git#main
+#      dockerfile: Dockerfile
 services:
   seerr:
-    build:
-      context: https://github.com/mitrajunior/seerr-custom2.git#main
-      dockerfile: Dockerfile
+    image: ghcr.io/mitrajunior/seerr-custom2:cc81e86   # ou :latest
+    
     container_name: seerr-custom2
     restart: unless-stopped
     ports:
