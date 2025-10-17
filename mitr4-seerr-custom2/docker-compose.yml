@@ -4,7 +4,7 @@ services:
     build:
       context: https://github.com/mitrajunior/seerr-custom2.git#main
       dockerfile: Dockerfile
-    container_name: seerr-custom
+    container_name: seerr-custom2
     restart: unless-stopped
     ports:
       - "5057:5055"
@@ -27,7 +27,7 @@ services:
 
   postgres:
     image: postgres:15
-    container_name: seerr-postgres-custom
+    container_name: seerr-postgres-custom2
     restart: unless-stopped
     environment:
       POSTGRES_USER: jellyseerr
