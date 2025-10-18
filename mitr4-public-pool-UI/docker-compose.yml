@@ -9,7 +9,7 @@ services:
       PROXY_AUTH_ADD: "false"
 
   app:
-    image: ghcr.io/mitrajunior/public-poolui-mitr4-custom:${APP_IMAGE_TAG:-v1.0.0}
+    image: ghcr.io/mitrajunior/public-poolui-mitr4-custom:latest
     restart: unless-stopped
     stop_grace_period: 1m
     environment:
