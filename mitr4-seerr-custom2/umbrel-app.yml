@@ -1,7 +1,7 @@
 manifestVersion: 1
 id: mitr4-seerr-custom2
-name: Seerr Custom 2
-tagline: Seerr mod com filtro para Movies/Series “Disponíveis”
+name: JellySeerr Custom 
+tagline: JellySeerr mod com filtro para Movies/Series “Disponíveis”
 icon: https://raw.githubusercontent.com/mitrajunior/seerr-custom2/main/public/os_logo_square.png
 category: Media
 version: "1.0.0"
