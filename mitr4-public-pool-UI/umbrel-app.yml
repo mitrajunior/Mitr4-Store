@@ -2,27 +2,15 @@ manifestVersion: 1
 id: mitr4-public-pool-ui
 category: finance
 name: Mitr4 Public Pool UI
-version: "1.0.0-mitr4"
-tagline: UI personalizada do Public Pool para o teu Umbrel
+version: "1.0.0"
+tagline: UI personalizada do Public Pool
 description: >-
-  Interface web personalizada (Mitr4) para gerir e visualizar dados do Public Pool.
-  Ideal para acompanhar miners, workers e estatísticas do teu setup de solo mining.
-  Esta app expõe apenas a UI (frontend). Garante que o backend do Public Pool
-  está a correr e acessível a partir do Umbrel.
+  Interface web personalizada (Mitr4) para visualizar dados do Public Pool.
+  Requer um backend do Public Pool ativo para funcionar.
 developer: Mitr4
 website: https://github.com/mitrajunior
 repo: https://github.com/mitrajunior/public-poolUI-Mitr4-Custom
 support: https://github.com/mitrajunior/Mitr4-Store/issues
-# Porta de acesso via Umbrel (externa). Podes alterar se conflitar.
-port: 3335
-# Imagens de galeria (opcional se fores publicar oficialmente)
-gallery: []
-# Caminho inicial quando a app abre
+port: 2020
 path: ""
-# credenciais default só se fizer sentido (normalmente vazio)
-defaultUsername: ""
-defaultPassword: ""
-# Dependências: se precisares garantir que a app "public-pool" está instalada, podes listar aqui o id oficial
-# dependencies:
-#   - public-pool
 submitter: Mitr4
