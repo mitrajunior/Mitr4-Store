@@ -18,8 +18,8 @@ repo: https://github.com/mitrajunior/public-poolUI-Mitr4-Custom
 support: https://github.com/mitrajunior/public-poolUI-Mitr4-Custom/issues
 
 gallery:
-  - https://raw.githubusercontent.com/mitrajunior/seerr-custom2/main/public/movies.png
-  - https://raw.githubusercontent.com/mitrajunior/seerr-custom2/main/public/series.png
+  - https://raw.githubusercontent.com/mitrajunior/public-poolUI-Mitr4-Custom/blob/main/public-poolUI-Mitr4-Custom.png
+
 releaseNotes: >-
   Primeira versão da app na Mitr4 Store com proxy do Umbrel e imagem GHCR.
 
