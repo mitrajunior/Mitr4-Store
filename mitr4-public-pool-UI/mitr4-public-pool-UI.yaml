@@ -1,0 +1,25 @@
+version: "3.8"
+#services:
+#  seerr:
+#    build:
+#      context: https://github.com/mitrajunior/seerr-custom2.git#main
+#      dockerfile: Dockerfile
+services:
+  seerr:
+    image: ghcr.io/mitrajunior/public-poolUI-Mitr4-Custom:latest   #cc81e86   # ou :latest
+
+    container_name: public-pool
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "127.0.0.1:${STRATUM_PORT}:${STRATUM_PORT}/tcp"
+      - "127.0.0.1:${API_PORT}:${API_PORT}/tcp"
+    volumes:
+      - "./${NETWORK}-DB:/public-pool/DB"
+      - "./.env:/public-pool/.env:ro"
+    environment:
+      - NODE_ENV=production
