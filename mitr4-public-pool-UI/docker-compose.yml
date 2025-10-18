@@ -9,27 +9,23 @@ services:
       PROXY_AUTH_ADD: "false"
 
   app:
-    build:
-      context: https://github.com/mitrajunior/public-poolUI-Mitr4-Custom.git#main
-      dockerfile: Dockerfile
-    image: ghcr.io/mitrajunior/public-poolui-mitr4-custom:latest
+    image: ghcr.io/mitrajunior/public-poolui-mitr4-custom:${APP_IMAGE_TAG:-v1.0.0}
     restart: unless-stopped
     stop_grace_period: 1m
     environment:
       NODE_ENV: production
       API_PORT: 2019
       STRATUM_PORT: 3333
-      NETWORK: mainnet
+      NETWORK: ${NETWORK:-mainnet}
       API_SECURE: "false"
       BITCOIN_RPC_URL: http://${APP_BITCOIN_RPC_HOST:-umbrel-bitcoind}:${APP_BITCOIN_RPC_PORT:-8332}
       BITCOIN_RPC_USER: ${APP_BITCOIN_RPC_USER:-umbrel}
       BITCOIN_RPC_PASSWORD: ${APP_BITCOIN_RPC_PASS:-moneyprintergobrrr}
       BITCOIN_RPC_TIMEOUT: 10000
     volumes:
-      - /umbrel/app-data/mitr4-public-pool-UI/db:/public-pool/DB
-      - /umbrel/app-data/mitr4-public-pool-UI/config:/public-pool/config
-      - /umbrel/app-data/mitr4-public-pool-UI/secrets:/public-pool/secrets
-      - /umbrel/app-data/mitr4-public-pool-UI/logs:/public-pool/logs
+      - ${APP_DATA_DIR:-/umbrel/app-data/mitr4-public-pool-UI}/db:/public-pool/DB
+      - ${APP_DATA_DIR:-/umbrel/app-data/mitr4-public-pool-UI}/config:/public-pool/config
+      - ${APP_DATA_DIR:-/umbrel/app-data/mitr4-public-pool-UI}/secrets:/public-pool/secrets
+      - ${APP_DATA_DIR:-/umbrel/app-data/mitr4-public-pool-UI}/logs:/public-pool/logs
     ports:
-      - "3333:3333/tcp"
-      - "3334:3334/tcp"
+      - "${APP_STRATUM_PORT:-3333}:3333/tcp"
