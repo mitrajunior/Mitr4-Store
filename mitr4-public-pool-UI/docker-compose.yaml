@@ -3,7 +3,7 @@ version: "3.8"
 services:
   app_proxy:
     environment:
-      APP_HOST: mitr4-public-pool_app_1
+      APP_HOST: mitr4-public-pool-UI_app_1
       APP_PORT: 2019
       APP_PROTOCOL: http
       PROXY_AUTH_ADD: "false"
