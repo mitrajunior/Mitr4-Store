@@ -3,7 +3,7 @@ manifestVersion: 1
 id: mitr4-mitr4-public-pool-UI
 name: Mitr4-Public-Pool-UI
 tagline: Public-Pool-UI Customisada
-icon: https://raw.githubusercontent.com/mitrajunior/public-poolUI-Mitr4-Custom/blob/main/logo-pool.svg
+icon: https://raw.githubusercontent.com/mitrajunior/public-poolUI-Mitr4-Custom/logo-pool.svg
 category: BTC Mining
 version: "1.0.0"
 port: 5057
