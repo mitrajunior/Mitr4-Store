@@ -6,7 +6,7 @@ version: "3.8"
 #      dockerfile: Dockerfile
 services:
   seerr:
-    image: ghcr.io/mitrajunior/seerr-custom2:latest    #cc81e86   # ou :latest
+    image: ghcr.io/mitrajunior/seerr-custom2:3bf7cd2    #cc81e86   # ou :latest
     
     container_name: seerr-custom2
     restart: unless-stopped
