@@ -1,1 +1,29 @@
 
+manifestVersion: 1
+id: mitr4-mitr4-public-pool-UI
+name: Mitr4-Public-Pool-UI
+tagline: Public-Pool-UI Customisada
+icon: https://raw.githubusercontent.com/mitrajunior/public-poolUI-Mitr4-Custom/blob/main/logo-pool.svg
+category: BTC Mining
+version: "1.0.0"
+port: 5057
+description: >-
+  Build personalizada da Public-Pool-UI
+
+developer: mitrajunior
+website: https://github.com/mitrajunior/public-poolUI-Mitr4-Custom
+submitter: mitrajunior
+submission: https://github.com/mitrajunior/Mitr4-Store
+repo: https://github.com/mitrajunior/public-poolUI-Mitr4-Custom
+support: https://github.com/mitrajunior/public-poolUI-Mitr4-Custom/issues
+
+gallery:
+  - https://raw.githubusercontent.com/mitrajunior/seerr-custom2/main/public/movies.png
+  - https://raw.githubusercontent.com/mitrajunior/seerr-custom2/main/public/series.png
+releaseNotes: >-
+  Primeira versão da app na Mitr4 Store com proxy do Umbrel e imagem GHCR.
+
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
