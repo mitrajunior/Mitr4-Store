@@ -2,7 +2,7 @@ manifestVersion: 1
 id: mitr4-public-pool-UI
 category: finance
 name: Mitr4 Public Pool
-version: "1.0.0"
+version: "1.0.0" # atualize junto com a tag publicada no GHCR
 tagline: Servidor Stratum do Public Pool com personalizações Mitr4
 description: >-
   Versão personalizada do servidor Public Pool com API e protocolos Stratum
@@ -22,8 +22,6 @@ gallery: []
 dependencies: []
 defaultUsername: ""
 defaultPassword: ""
-
-
 
 
 
