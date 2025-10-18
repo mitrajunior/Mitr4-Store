@@ -26,10 +26,10 @@ services:
       BITCOIN_RPC_PASSWORD: ${APP_BITCOIN_RPC_PASS:-moneyprintergobrrr}
       BITCOIN_RPC_TIMEOUT: 10000
     volumes:
-      - /umbrel/app-data/mitr4-public-pool/db:/public-pool/DB
-      - /umbrel/app-data/mitr4-public-pool/config:/public-pool/config
-      - /umbrel/app-data/mitr4-public-pool/secrets:/public-pool/secrets
-      - /umbrel/app-data/mitr4-public-pool/logs:/public-pool/logs
+      - /umbrel/app-data/mitr4-public-pool-UI/db:/public-pool/DB
+      - /umbrel/app-data/mitr4-public-pool-UI/config:/public-pool/config
+      - /umbrel/app-data/mitr4-public-pool-UI/secrets:/public-pool/secrets
+      - /umbrel/app-data/mitr4-public-pool-UI/logs:/public-pool/logs
     ports:
       - "3333:3333/tcp"
       - "3334:3334/tcp"
