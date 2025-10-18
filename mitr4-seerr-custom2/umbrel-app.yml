@@ -1,7 +1,7 @@
 manifestVersion: 1
 id: mitr4-seerr-custom2
-name: JellySeerr Custom 
-tagline: JellySeerr mod com filtro para Movies/Series “Disponíveis”
+name: JellySeerr Mitr4-Custom 
+tagline: JellySeerr mod com filtro para Movies/Series “Available”
 icon: https://raw.githubusercontent.com/mitrajunior/seerr-custom2/main/public/os_logo_square.png
 category: Media
 version: "1.0.0"
@@ -22,7 +22,7 @@ gallery:
   - https://raw.githubusercontent.com/mitrajunior/seerr-custom2/main/public/movies.png
   - https://raw.githubusercontent.com/mitrajunior/seerr-custom2/main/public/series.png
 releaseNotes: >-
-  Primeira versão da app na Mitr4 Store com proxy do Umbrel e imagem GHCR.
+  Mitr4 Store com proxy do Umbrel e imagem GHCR.
 
 dependencies: []
 path: ""
