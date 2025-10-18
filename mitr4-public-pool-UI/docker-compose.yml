@@ -4,7 +4,7 @@ services:
   app_proxy:
     environment:
       APP_HOST: mitr4-public-pool-UI_app_1
-      APP_PORT: 2019
+      APP_PORT: 2021
       APP_PROTOCOL: http
       PROXY_AUTH_ADD: "false"
 
@@ -14,7 +14,7 @@ services:
     stop_grace_period: 1m
     environment:
       NODE_ENV: production
-      API_PORT: 2019
+      API_PORT: 2021
       STRATUM_PORT: 3333
       NETWORK: ${NETWORK:-mainnet}
       API_SECURE: "false"
