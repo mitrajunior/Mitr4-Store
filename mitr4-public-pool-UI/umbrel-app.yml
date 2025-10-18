@@ -1,29 +1,28 @@
-
 manifestVersion: 1
-id: mitr4-public-pool-UI
-name: Mitr4-Public-Pool-UI
-tagline: Public-Pool-UI Customisada
-icon: https://raw.githubusercontent.com/mitrajunior/public-poolUI-Mitr4-Custom/blob/main/public-poolUI-Mitr4-Custom.png
-category: BTC Mining
-version: "1.0.0"
-port: 5057
+id: mitr4-public-pool-ui
+category: finance
+name: Mitr4 Public Pool UI
+version: "1.0.0-mitr4"
+tagline: UI personalizada do Public Pool para o teu Umbrel
 description: >-
-  Build personalizada da Public-Pool-UI
-
-developer: mitrajunior
-website: https://github.com/mitrajunior/public-poolUI-Mitr4-Custom
-submitter: mitrajunior
-submission: https://github.com/mitrajunior/Mitr4-Store
+  Interface web personalizada (Mitr4) para gerir e visualizar dados do Public Pool.
+  Ideal para acompanhar miners, workers e estatísticas do teu setup de solo mining.
+  Esta app expõe apenas a UI (frontend). Garante que o backend do Public Pool
+  está a correr e acessível a partir do Umbrel.
+developer: Mitr4
+website: https://github.com/mitrajunior
 repo: https://github.com/mitrajunior/public-poolUI-Mitr4-Custom
-support: https://github.com/mitrajunior/public-poolUI-Mitr4-Custom/issues
-
-gallery:
-  - https://raw.githubusercontent.com/mitrajunior/public-poolUI-Mitr4-Custom/blob/main/public-poolUI-Mitr4-Custom.png
-
-releaseNotes: >-
-  Primeira versão da app na Mitr4 Store com proxy do Umbrel e imagem GHCR.
-
-dependencies: []
+support: https://github.com/mitrajunior/Mitr4-Store/issues
+# Porta de acesso via Umbrel (externa). Podes alterar se conflitar.
+port: 3335
+# Imagens de galeria (opcional se fores publicar oficialmente)
+gallery: []
+# Caminho inicial quando a app abre
 path: ""
+# credenciais default só se fizer sentido (normalmente vazio)
 defaultUsername: ""
 defaultPassword: ""
+# Dependências: se precisares garantir que a app "public-pool" está instalada, podes listar aqui o id oficial
+# dependencies:
+#   - public-pool
+submitter: Mitr4
