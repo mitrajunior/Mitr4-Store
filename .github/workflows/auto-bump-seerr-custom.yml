@@ -1,0 +1,62 @@
+name: Auto-bump Seerr Custom 2
+
+on:
+  repository_dispatch:
+    types: [bump-seerr-custom2]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read payload
+        id: payload
+        run: |
+          echo "APP_ID=${{ github.event.client_payload.appId }}" >> $GITHUB_OUTPUT
+          echo "VERSION=${{ github.event.client_payload.version }}" >> $GITHUB_OUTPUT
+          echo "IMAGE=${{ github.event.client_payload.image }}" >> $GITHUB_OUTPUT
+          echo "DIGEST=${{ github.event.client_payload.digest }}" >> $GITHUB_OUTPUT
+          echo "SHA=${{ github.event.client_payload.sha }}" >> $GITHUB_OUTPUT
+
+      - name: Update manifest (umbrel-app.yml)
+        run: |
+          APP_DIR="apps/seerr-custom2"    # <-- ajusta se o caminho for outro
+          MANIFEST="${APP_DIR}/umbrel-app.yml"
+          COMPOSE="${APP_DIR}/docker-compose.yml"
+
+          # Bump na versão do manifest
+          sed -i -E "s/^version: \".*\"/version: \"${{ steps.payload.outputs.VERSION }}\"/" "$MANIFEST"
+
+          # Se existir docker-compose, atualiza a tag da imagem (mantém repo)
+          if [ -f "$COMPOSE" ]; then
+            # por tag (ex.: latest, ou YYYY.MM.DD+sha7)
+            sed -i -E "s|(image:\\s*ghcr\\.io/.+?:).*|\\1${{ steps.payload.outputs.VERSION }}|" "$COMPOSE"
+            # OU, se preferires pin por digest, comenta a linha acima e usa:
+            # sed -i -E "s|(image:\\s*).+|\\1${{ steps.payload.outputs.DIGEST }}|" "$COMPOSE"
+          fi
+
+          echo "Updated files:"
+          git status --porcelain
+          echo "----"; cat "$MANIFEST"; echo "----"
+          if [ -f "$COMPOSE" ]; then cat "$COMPOSE"; fi
+
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "chore(apps): bump seerr-custom2 to ${{ steps.payload.outputs.VERSION }}"
+          title: "Bump Seerr Custom 2 to ${{ steps.payload.outputs.VERSION }}"
+          body: |
+            Auto-bump triggered by seerr-custom2 build.
+            - Image: `${{ steps.payload.outputs.IMAGE }}`
+            - Digest: `${{ steps.payload.outputs.DIGEST }}`
+            - SHA: `${{ steps.payload.outputs.SHA }}`
+          branch: chore/bump-seerr-custom2-${{ steps.payload.outputs.SHA }}
+          add-paths: |
+            apps/seerr-custom2/umbrel-app.yml
+            apps/seerr-custom2/docker-compose.yml
+          labels: automerge
