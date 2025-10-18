@@ -12,7 +12,7 @@ services:
     build:
       context: https://github.com/mitrajunior/public-poolUI-Mitr4-Custom.git#main
       dockerfile: Dockerfile
-    image: ghcr.io/mitrajunior/public-pool:latest
+    image: ghcr.io/mitrajunior/public-poolui-mitr4-custom:latest
     restart: unless-stopped
     stop_grace_period: 1m
     environment:
