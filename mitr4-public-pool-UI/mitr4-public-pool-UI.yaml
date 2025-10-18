@@ -1,25 +1,27 @@
-version: "3.8"
-#services:
-#  seerr:
-#    build:
-#      context: https://github.com/mitrajunior/seerr-custom2.git#main
-#      dockerfile: Dockerfile
+# Compose para Umbrel (sem "version:" para evitar avisos em Compose recente)
 services:
-  seerr:
-    image: ghcr.io/mitrajunior/public-poolUI-Mitr4-Custom:latest   #cc81e86   # ou :latest
-
-    container_name: public-pool
-    build:
-      context: .
-      dockerfile: Dockerfile
-    restart: unless-stopped
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    ports:
-      - "127.0.0.1:${STRATUM_PORT}:${STRATUM_PORT}/tcp"
-      - "127.0.0.1:${API_PORT}:${API_PORT}/tcp"
-    volumes:
-      - "./${NETWORK}-DB:/public-pool/DB"
-      - "./.env:/public-pool/.env:ro"
+  app_proxy:
     environment:
-      - NODE_ENV=production
+      # IMPORTANTE: tem de bater certo com "<id>_<service>_1"
+      APP_HOST: mitr4-public-pool-ui_web_1
+      # Porta interna do container que serve a UI (a maior parte das builds de public-pool-ui expõem 80)
+      APP_PORT: 80
+
+  web:
+    # 👉 Troca a imagem abaixo pela que o teu workflow publica (ex.: ghcr.io/mitrajunior/public-poolui-mitr4-custom:latest)
+    image: ghcr.io/mitrajunior/public-poolui-mitr4-custom:latest
+    restart: on-failure
+    stop_grace_period: 1m
+    # Normalmente a UI do public-pool-ui (Angular/Caddy) escuta na 80. Não precisas mapear portas se usas app_proxy.
+    # Se precisares de portas extra (não comum), descomenta:
+    # ports:
+    #   - "3335:80"
+    environment:
+      # Ajusta se a tua imagem suportar estas variáveis (o public-pool-ui de referência aceita DOMAIN, etc.) :contentReference[oaicite:1]{index=1}
+      DOMAIN: ${DEVICE_DOMAIN_NAME}
+      LOGLEVEL: INFO
+      LOGFORMAT: json
+    # Se a tua UI precisar de apontar para o backend do Public Pool via variável, adiciona aqui, por ex.:
+    # PUBLIC_POOL_API_URL: "http://<ip-do-backend>:<porta>"
+    # volumes:
+    #   - ${APP_DATA_DIR}/data:/data
