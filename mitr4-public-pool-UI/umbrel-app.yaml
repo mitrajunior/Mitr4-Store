@@ -1,0 +1,24 @@
+manifestVersion: 1
+id: mitr4-public-pool
+category: finance
+name: Mitr4 Public Pool
+version: "1.0.0"
+tagline: Servidor Stratum do Public Pool com personalizações Mitr4
+description: >-
+  Versão personalizada do servidor Public Pool com API e protocolos Stratum
+  expostos para mineração. Inclui integrações prontas para o Umbrel, podendo
+  ligar-se diretamente ao Bitcoin Core interno.
+developer: Mitr4
+website: https://github.com/mitrajunior/public-poolUI-Mitr4-Custom
+repo: https://github.com/mitrajunior/public-poolUI-Mitr4-Custom
+support: https://github.com/mitrajunior/public-poolUI-Mitr4-Custom/issues
+port: 2019
+path: ""
+submitter: Mitr4
+releaseNotes: >-
+  Integração inicial da build personalizada do Public Pool para a Mitr4 Store.
+  Inclui proxy automático Umbrel e pré-configuração para o Bitcoin Core interno.
+gallery: []
+dependencies: []
+defaultUsername: ""
+defaultPassword: ""
