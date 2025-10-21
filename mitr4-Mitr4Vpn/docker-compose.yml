@@ -1,0 +1,59 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: mitr4
+      POSTGRES_PASSWORD: mitr4pass
+      POSTGRES_DB: mitr4vpn
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  openvpn:
+    image: kylemanna/openvpn
+    container_name: mitr4vpn-openvpn
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ovpn-data:/etc/openvpn
+      - openvpn-logs:/var/log/openvpn
+    ports:
+      - "1194:1194/udp"
+    restart: unless-stopped
+    command: ["ovpn_run"]
+
+  api:
+    image: ghcr.io/mitrajunior/mitr4vpn-api:latest
+    container_name: mitr4vpn-api
+    environment:
+      - DB_URL=postgresql+psycopg2://mitr4:mitr4pass@db:5432/mitr4vpn
+      - SECRET_KEY=${SECRET_KEY:-umbrelsecretchange}
+      - ADMIN_DEFAULT_PASSWORD=admin
+      - OVPN_STATUS_LOG=/var/log/openvpn/openvpn-status.log
+      - OVPN_MGMT_SOCK=
+    volumes:
+      - openvpn-logs:/var/log/openvpn
+    depends_on:
+      - db
+      - openvpn
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+
+  web:
+    image: ghcr.io/mitrajunior/mitr4vpn-web:latest
+    container_name: mitr4vpn-web
+    environment:
+      - VITE_API_BASE=http://localhost:8000
+    depends_on:
+      - api
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+
+volumes:
+  dbdata:
+  ovpn-data:
+  openvpn-logs:
