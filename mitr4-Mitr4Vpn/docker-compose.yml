@@ -13,7 +13,6 @@ services:
 
   openvpn:
     image: kylemanna/openvpn
-    container_name: mitr4vpn-openvpn
     cap_add:
       - NET_ADMIN
     volumes:
@@ -26,13 +25,11 @@ services:
 
   api:
     image: ghcr.io/mitrajunior/mitr4vpn-api:latest
-    container_name: mitr4vpn-api
     environment:
       - DB_URL=postgresql+psycopg2://mitr4:mitr4pass@db:5432/mitr4vpn
-      - SECRET_KEY=${SECRET_KEY:-umbrelsecretchange}
+      - SECRET_KEY=umbrelsecretchange
       - ADMIN_DEFAULT_PASSWORD=admin
       - OVPN_STATUS_LOG=/var/log/openvpn/openvpn-status.log
-      - OVPN_MGMT_SOCK=
     volumes:
       - openvpn-logs:/var/log/openvpn
     depends_on:
@@ -44,7 +41,6 @@ services:
 
   web:
     image: ghcr.io/mitrajunior/mitr4vpn-web:latest
-    container_name: mitr4vpn-web
     environment:
       - VITE_API_BASE=http://localhost:8000
     depends_on:
