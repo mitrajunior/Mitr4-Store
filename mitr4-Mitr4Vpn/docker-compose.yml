@@ -26,23 +26,23 @@ services:
   api:
     image: ghcr.io/mitrajunior/mitr4vpn-api:latest
     environment:
-      - DB_URL=postgresql+psycopg2://mitr4:mitr4pass@db:5432/mitr4vpn
-      - SECRET_KEY=umbrelsecretchange
-      - ADMIN_DEFAULT_PASSWORD=admin
-      - OVPN_STATUS_LOG=/var/log/openvpn/openvpn-status.log
-    volumes:
-      - openvpn-logs:/var/log/openvpn
+      DB_URL: postgresql+psycopg2://mitr4:mitr4pass@db:5432/mitr4vpn
+      SECRET_KEY: umbrelsecret
+      ADMIN_DEFAULT_PASSWORD: admin
+      OVPN_STATUS_LOG: /var/log/openvpn/openvpn-status.log
     depends_on:
       - db
       - openvpn
     restart: unless-stopped
     ports:
       - "8000:8000"
+    volumes:
+      - openvpn-logs:/var/log/openvpn
 
   web:
     image: ghcr.io/mitrajunior/mitr4vpn-web:latest
     environment:
-      - VITE_API_BASE=http://localhost:8000
+      VITE_API_BASE: http://localhost:8000
     depends_on:
       - api
     restart: unless-stopped
