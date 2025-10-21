@@ -1,55 +1,68 @@
-version: "3.9"
+version: "3.8"
 
 services:
-  db:
+  mitr4vpn-api:
+    image: ghcr.io/mitrajunior/mitr4vpn-api:latest
+    container_name: mitr4vpn-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      TZ: "Europe/Lisbon"
+      DB_URL: "postgresql+psycopg2://mitr4:mitr4pass@mitr4vpn-postgres:5432/mitr4vpn"
+      SECRET_KEY: "umbrelsecret"
+      ADMIN_DEFAULT_PASSWORD: "admin"
+      OVPN_STATUS_LOG: "/var/log/openvpn/openvpn-status.log"
+    depends_on:
+      mitr4vpn-postgres:
+        condition: service_healthy
+      mitr4vpn-openvpn:
+        condition: service_started
+    volumes:
+      - /umbrel/app-data/mitr4vpn/logs:/var/log/openvpn
+      - /umbrel/app-data/mitr4vpn/config:/etc/mitr4vpn
+
+  mitr4vpn-web:
+    image: ghcr.io/mitrajunior/mitr4vpn-web:latest
+    container_name: mitr4vpn-web
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    environment:
+      TZ: "Europe/Lisbon"
+      VITE_API_BASE: "http://localhost:8000"
+    depends_on:
+      mitr4vpn-api:
+        condition: service_started
+    volumes:
+      - /umbrel/app-data/mitr4vpn/webdata:/usr/share/nginx/html
+
+  mitr4vpn-openvpn:
+    image: kylemanna/openvpn
+    container_name: mitr4vpn-openvpn
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
+    ports:
+      - "1194:1194/udp"
+    environment:
+      TZ: "Europe/Lisbon"
+    volumes:
+      - /umbrel/app-data/mitr4vpn/ovpn-data:/etc/openvpn
+      - /umbrel/app-data/mitr4vpn/logs:/var/log/openvpn
+
+  mitr4vpn-postgres:
     image: postgres:16-alpine
+    container_name: mitr4vpn-postgres
+    restart: unless-stopped
     environment:
       POSTGRES_USER: mitr4
       POSTGRES_PASSWORD: mitr4pass
       POSTGRES_DB: mitr4vpn
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mitr4"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
     volumes:
-      - dbdata:/var/lib/postgresql/data
-    restart: unless-stopped
-
-  openvpn:
-    image: kylemanna/openvpn
-    cap_add:
-      - NET_ADMIN
-    volumes:
-      - ovpn-data:/etc/openvpn
-      - openvpn-logs:/var/log/openvpn
-    ports:
-      - "1194:1194/udp"
-    restart: unless-stopped
-    command: ["ovpn_run"]
-
-  api:
-    image: ghcr.io/mitrajunior/mitr4vpn-api:latest
-    environment:
-      DB_URL: postgresql+psycopg2://mitr4:mitr4pass@db:5432/mitr4vpn
-      SECRET_KEY: umbrelsecret
-      ADMIN_DEFAULT_PASSWORD: admin
-      OVPN_STATUS_LOG: /var/log/openvpn/openvpn-status.log
-    depends_on:
-      - db
-      - openvpn
-    restart: unless-stopped
-    ports:
-      - "8000:8000"
-    volumes:
-      - openvpn-logs:/var/log/openvpn
-
-  web:
-    image: ghcr.io/mitrajunior/mitr4vpn-web:latest
-    environment:
-      VITE_API_BASE: http://localhost:8000
-    depends_on:
-      - api
-    restart: unless-stopped
-    ports:
-      - "5173:5173"
-
-volumes:
-  dbdata:
-  ovpn-data:
-  openvpn-logs:
+      - /umbrel/app-data/mitr4vpn/postgres:/var/lib/postgresql/data
