@@ -1,7 +1,7 @@
 id: mitr4vpn
 name: Mitr4Vpn
 version: "0.1.0"
-tagline: "Servidor OpenVPN com interface web moderna"
+tagline: Servidor OpenVPN com interface web moderna
 icon: ./assets/icon-app.svg
 category: networking
 port: 5173
