@@ -1,0 +1,25 @@
+id: mitr4vpn
+name: Mitr4Vpn
+version: "0.1.0"
+tagline: "Servidor OpenVPN com interface web moderna"
+icon: ./assets/icon-app.svg
+category: networking
+port: 5173
+description: >
+  Mitr4Vpn é um servidor OpenVPN completo, com interface web moderna em dark mode azul,
+  permitindo gerir utilizadores, sessões, certificados, estatísticas e perfis `.ovpn`.
+  Desenvolvido em Python (FastAPI) e React + Tailwind, suporta instalação no Umbrel via Docker,
+  no Windows e Linux nativamente, e possui gestão integrada de PKI, CRL e geração de perfis.
+
+developer: Mitra Junior
+website: https://github.com/mitrajunior/Mitr4Vpn
+repo: https://github.com/mitrajunior/Mitr4Vpn
+support: https://github.com/mitrajunior/Mitr4Vpn/issues
+dependencies: []
+path: ""
+defaultPassword: admin
+releaseNotes: |
+  - Primeira versão da Mitr4Vpn
+  - Painel de administração com RBAC
+  - Geração de certificados e perfis
+  - OpenVPN integrado via Docker
