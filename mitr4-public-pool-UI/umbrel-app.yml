@@ -1,5 +1,5 @@
 manifestVersion: 1
-id: public-poolui-mitr4
+id: mitr4-public-pool-ui
 category: finance
 name: Mitr4 Public Pool
 version: "1.0.0" # atualize junto com a tag publicada no GHCR
