@@ -1,7 +1,7 @@
 
 
 services:
-  public-pool-ui:
+  mitr4-public-pool-ui:
     image: ghcr.io/mitrajunior/public-poolui-mitr4-custom:latest
     restart: unless-stopped
     stop_grace_period: 1m
