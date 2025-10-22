@@ -1,8 +1,7 @@
 
 
 services:
-
-  public-pool-UI:
+  public-pool-ui:
     image: ghcr.io/mitrajunior/public-poolui-mitr4-custom:latest
     restart: unless-stopped
     stop_grace_period: 1m
@@ -16,13 +15,13 @@ services:
       BITCOIN_RPC_USER: ${APP_BITCOIN_RPC_USER:-umbrel}
       BITCOIN_RPC_PASSWORD: ${APP_BITCOIN_RPC_PASS:-moneyprintergobrrr}
       BITCOIN_RPC_TIMEOUT: 10000
-    ports:
-      - "${APP_STRATUM_PORT:-3333}:3333/tcp"
-    environment:
       TZ: "Europe/Lisbon"
+    ports:
+      - "${APP_PORT:-2021}:2021"
+      - "${APP_STRATUM_PORT:-3333}:3333"
     volumes:
-      - ${APP_DATA_DIR:-/umbrel/app-data/mitr4-public-pool-UI}/db:/public-pool/DB
-      - ${APP_DATA_DIR:-/umbrel/app-data/mitr4-public-pool-UI}/config:/public-pool/config
-      - ${APP_DATA_DIR:-/umbrel/app-data/mitr4-public-pool-UI}/secrets:/public-pool/secrets
-      - ${APP_DATA_DIR:-/umbrel/app-data/mitr4-public-pool-UI}/logs:/public-pool/logs
+      - ${APP_DATA_DIR:-/umbrel/app-data/public-poolui-mitr4}/db:/public-pool/DB
+      - ${APP_DATA_DIR:-/umbrel/app-data/public-poolui-mitr4}/config:/public-pool/config
+      - ${APP_DATA_DIR:-/umbrel/app-data/public-poolui-mitr4}/secrets:/public-pool/secrets
+      - ${APP_DATA_DIR:-/umbrel/app-data/public-poolui-mitr4}/logs:/public-pool/logs
 
